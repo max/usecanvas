@@ -2,9 +2,9 @@
 
 const got = require('got');
 
-function usecanvas(CANVAS_URL) {
+function usecanvas(canvasURL) {
   return new Promise((resolve, reject) => {
-    got(CANVAS_URL, { json: true })
+    got(canvasURL, { json: true, retries: 1, timeout: 150000 })
       .then(response => resolve(response.body))
       .catch(error => reject(error));
   });
