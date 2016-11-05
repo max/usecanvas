@@ -3,9 +3,11 @@
 const got = require('got');
 
 function usecanvas(CANVAS_URL) {
-  const response = await got(CANVAS_URL, { json: true });
-  const canvas = response.data.attributes.blocks;
-  return canvas;
+  return new Promise((resolve, reject) => {
+    got(CANVAS_URL, { json: true })
+      .then(response => resolve(response.body))
+      .catch(error => reject(error));
+  });
 }
 
 module.exports = usecanvas;
